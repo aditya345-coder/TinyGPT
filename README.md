@@ -71,17 +71,3 @@ A 124M model cannot do multi-step math reasoning (GPT-3 175B gets 58%). The eval
 | MLP (3072 hidden) | Processes each position independently |
 | LayerNorm | Stabilizes gradients |
 | Weight tying | Input and output embeddings share weights |
-
-## Interview Q&A
-
-**Q: Why build from scratch instead of using HuggingFace?**
-> I wanted to understand every layer — attention, residual connections, weight tying. Building from scratch forced me to learn the internals.
-
-**Q: How do you load pretrained weights?**
-> Download GPT-2 via HuggingFace, then map parameter names by stripping the `transformer.` prefix. Only matching shapes are copied.
-
-**Q: Why does Stage 2 mix in Shakespeare data?**
-> Without it, the model forgets Shakespeare (catastrophic forgetting). Mixing 10% Shakespeare during math training preserves both skills.
-
-**Q: Why is math accuracy low?**
-> GPT-2 has 124M parameters — too small for true reasoning. It learns patterns and memorizes solutions. This is a known limitation of small LMs.
